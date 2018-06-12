@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="co.za.botmadesigns.vryFees" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>VRYSTAAT Kunstefees</name>
+    <description>
+        The APP of the Vrystaat Arts Festival
+    </description>
+    <author email="BotmaJ@hotmail.com" href="http://botmaDesigns.com">
+        BotmaDesigns.com
+    </author>
+    <content src="index.html" />
+    <icon src="icon.png" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#ee6e73" />
+    <preference name="StatusBarStyle" value="blacktranslucent" />
+</widget>

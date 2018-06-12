@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="co.za.botmadesigns.vryFees" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>VRYSTAAT Kunstefees</name>
+    <description>
+        The APP of the Vrystaat Arts Festival
+    </description>
+    <author email="BotmaJ@hotmail.com" href="http://botmaDesigns.com">
+        BotmaDesigns.com
+    </author>
+    <content src="index.html" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="android-minSdkVersion" value="14" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#ee6e73" />
+    <preference name="StatusBarStyle" value="blacktranslucent" />
+    <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.3" />
+    <plugin name="phonegap-plugin-push" source="npm" spec="~1.8.0">
+        <variable name="SENDER_ID" value="XXXXXXX" />
+    </plugin>
+    <plugin name="cordova-plugin-console" source="npm" spec="~1.0.3" />
+    <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.1" />
+    <plugin name="cordova-plugin-whitelist" source="npm" />
+	
+	<icon src="icon.png" />
+   
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+</widget>

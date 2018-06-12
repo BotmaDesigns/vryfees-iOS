@@ -1,0 +1,484 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100vh;
+    margin:0px;
+    padding:0px;
+    width:100%;
+	background:url(../img/background.jpg) center center no-repeat;
+	background-size:cover;
+	background-attachment: fixed;
+}
+
+a {text-decoration:none;}
+
+header{
+	position:fixed;
+	top:0;
+	width:100%;
+	background-color:#fff;
+	z-index:101;
+}
+
+article{
+	min-height:100vh;
+}
+#article{min-height:100vh;width:100vw;}
+#spacer{height:10.5em;width:100%;}
+#fadeIn{
+	background-color:#000;
+	color:white;
+	font-size:2em;
+	text-align:center;
+	width:100vw;
+	height:100vh;
+}
+#errorMSG{
+	color:white;
+	position:absolute;
+	text-align:center;
+	top:1em;
+	padding:2em;
+}
+#splashlogo{
+	background:url(../img/VFlogo.png) center center no-repeat;
+	width:100%;
+	height:100%;
+	margin:auto auto auto auto;
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 4000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 4000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 4000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+#menu{
+	font-size:1.8em;
+	width:100vw;
+	text-align:right;
+	padding-top:2em;
+}
+
+#menuBar{
+	min-height:3em;
+	margin-top:1em;
+}
+
+#vrystaat{
+	font-size:2em;
+	color:#3d3c4c;
+}
+
+#subText{
+	font-size:0.7em;
+	color:#c73476;
+}
+
+#titleBar{
+	padding:0 1em 1em 1em;
+	font-size:0.7em;
+	width:100%;
+	height:100%;
+	text-align:left;
+	background-color:#fff;
+	margin-top:auto;
+	margin-bottom:0;
+}
+
+#logoWrapper{
+	display:inline-block;
+	width:70%;
+}
+
+#logo{
+	height:4em;
+	width:4em;
+	background:url(../img/VFlogo.png) center center no-repeat;
+	background-size:100% auto;
+	display:inline-block;
+	margin-right:1em;
+}
+#stallMap{
+	position:absolute;
+	width:350px; 
+	height:260px;
+	overflow:hidden;
+}
+#mapWrapper{
+	position:absolute;
+	width:350px; 
+	height:260px;
+	overflow:hidden;
+}
+#myCanvas{
+	position:absolute;
+	width:350px; 
+	height:260px;
+}
+#meMap{
+	position:absolute;
+	width:15px;
+	height:auto;
+	display:none;
+}
+
+#map{
+	width:100%;
+	height:auto;
+}
+#sponsor{
+	width:100vw;
+	height:100vh;
+	background:url(../img/sponsors.jpg) top center no-repeat;
+	background-size:contain;
+	background-attachment: fixed;
+}
+
+#shows{
+	padding:1em 1em 2em 1em;
+	text-align:center;
+}
+#today{
+	background-color:rgba(199, 52, 118, 0.95);
+	padding:1em;
+}
+
+#todayShed{
+	padding:0;
+	margin:0;
+	width:100%;
+}
+#todayShed :nth-child(even){background-color:rgba(199, 52, 118, 0.95);}
+
+#program{width:100vw; height:auto;}
+
+#homeAdd1{width:100%;}
+#addImg1{height:22em;background-color:pink;}
+#addTitle1{padding:1em 0 1em 0;text-align:center;color:white;font-weight:bold;}
+#addSynop1{color:black; padding:0 1em 1em 1em;}
+#homeAdd2{width:100%;}
+#addImg2{height:22em;background-color:pink;}
+#addTitle2{padding:1em 0 1em 0;text-align:center;color:white;font-weight:bold;}
+#addSynop2{color:black; padding:0 1em 1em 1em;}
+
+.vrynge{background-color:rgba(253, 185, 19 ,0.95);} .vrynge a{color:black;}
+.main{background-color:rgba(199, 52, 118, 0.95);} .main a{color:white;}
+.lit{background-color:rgba(0, 168, 229, 0.9);} .lit a{color:white;}
+.pap{background-color:rgba(188, 194, 6, 0.95);} .pap a{color:black;}
+.teater{background-color:rgba(46,121,176, 0.95);} .teater a{color:white;}
+.music{background-color:rgba(225,213,0, 0.9);} .music a{color:black;}
+.borderless{background-color:rgba(188,194,6, 0.95);} .borderless a{color:black;}
+.film{background-color:rgba(138,0,90, 0.95);} .film a{color:white;}
+.art{background-color:rgba(237,18,97, 0.9); color:white;} .art a{color:white;}
+.mondvol{background-color:rgba(60,64,81, 0.9);} .mondvol a{color:white;}
+.stall{background-color:rgba(255,255,255, 0.9);} .stall a{color:black;}
+.home{background-color:rgba(237,18,97, 0.9); color:white;} .home a{color:white;}
+
+.program{width:100vw;}
+
+.selectLink{
+	background-color:pink;
+	text-align:center;
+}
+.insideIMG{
+  display: block;
+  text-align:center;
+  vertical-align:center;
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+}
+
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1.5s, opacity 1.5s linear;
+}
+
+.venueBtn{
+	width:100%;
+	text-align:center;
+	background-color: #c73476;
+}
+
+.venueSchedule{
+	width:100%;
+	text-align:center;
+	color:white;
+	border-spacing:1px;
+}
+.venueSchedule a{
+	color:white;
+}
+.venueSchedule td {
+	padding:1em 0 1em 0;
+	background-color:rgba(30, 131, 194, 0.9);
+}
+.backBtn{font-size:3em; position:fixed; top:0.1em; left:0.5em;}
+
+.menu a:not(:first-child) {
+	display: none;
+	font-size:0.9em;
+	text-align:left;
+}
+.menu a:first-child{text-align:right;}
+
+.main{
+	display:none;
+}
+.main.show{
+	display:block;
+}
+
+.catBtn{
+	width:100%;
+}
+
+.white{
+	color:white;
+}
+
+.showMenu{
+	display:block;
+	text-align:right;
+	background-color:#c73476;
+	height:100vh;
+	margin-top:-0.6em;
+	margin-bottom:0.7em;
+}
+
+.menu.showMenu a{
+	padding:0.9em 1em 0.9em 1em;
+	display:block;
+	float:none;
+	color:white;
+}
+
+.menuBtn {padding:1em; position:absolute; top:-0.5em; right:0; color:#1e83c2;}
+
+
+.active{background-color:#1e83c2;}
+
+
+.venueLink{
+	background-color:rgba(30, 131, 194, 0.9);
+	width:100%;
+	font-weight:bold;
+	text-align:center;
+}
+.venueLink a{color:white;}
+.venueLink td{padding:1em 0 1em 0;}
+.venueLink :nth-child(even){background-color:rgba(199, 52, 118, 0.95);}
+
+.googleVenueLink{
+	text-align:center;
+	width:100%;
+	background-color:#c73476;
+	padding:1em 0 1em 0;
+	margin:auto;
+	font-weight:bold;
+}
+
+.googleVenueLink a{
+	color:white;
+}
+
+.venueImg{
+	height:20em;
+	width:100%;
+	margin:0 auto 0 auto;
+	overflow:hidden;
+}
+
+.venueTitle{
+	background-color:white;
+	color:#c73476;
+	font-weight:bold;
+	margin:auto;
+	text-align:center;
+	font-size:1.2em;
+}
+
+.venueName{padding:1em 0 1em 0;}
+
+.catLink{
+	text-align:center;
+	width:100%;
+	/*padding:1em 0 1em 0;*/
+	line-height:9.5vh;
+	vertical-align:center;
+	/*background-color:rgba(30, 131, 194, 0.9);*/
+	color:white;
+	margin:auto;
+	font-weight:bold;
+}
+/*.catLink a{color:white;}*/
+
+.catSchedule{
+	display:none;
+	text-align:center;
+	background-color:#c73476;
+}
+.catSchedule.show{
+	display:block; 
+	padding-bottom:1em;
+}
+.catSchedule.show a{color:#fff;}
+
+.categoriesTable{
+	width:100%;
+	background-color:#c73476;
+	text-align:center;
+}
+.categoriesTable tr{background-color:#c73476;}
+.categoriesTable td{padding:1em 0 1em 0;}
+
+.schedule{
+	width:100%;
+	text-align:center;
+	margin:auto;
+	color:white;
+}
+.schedule a{color:white;}
+
+.showImg{
+	height:20em;
+	width:100%;
+	margin-bottom:1em;
+	overflow:hidden;
+}
+
+.showTitle{
+	background-color:#c73476;
+	padding-bottom:1.5em;
+	color:#fff;
+	font-weight:bold;
+	text-align:center;
+	font-size:1.2em;
+}
+
+.showDesc{
+	background-color:white;
+	color:#000;
+	padding:1em;
+}
+
+.buyTicket {
+	background-color:#c73476;
+	padding-bottom:1.5em;
+	padding-top:1.5em;
+	color:#fff;
+	font-weight:bold;
+	text-align:center;
+	font-size:1.2em;
+}
+.buyTicket a{
+	color:#fff;
+}
+
+.mapBtn{
+	text-align:center;
+	width:100%;
+	background-color:#c73476;
+	padding:1em 0 1em 0;
+	margin:auto;
+	font-weight:bold;
+}
+
+.bold{font-weight:bold;}
+
+.mapBtn:nth-child(even){background-color: #blue;}
+
+/* Portrait layout (default) */
+.app {
+    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+.clear-fix{clear:both;}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
