@@ -1,5 +1,6 @@
 var serverData = JSON.parse(localStorage.getItem("data"));
 var venueData = JSON.parse(localStorage.getItem("venueUpdate"));
+var stallsData = JSON.parse(localStorage.getItem("stallsUpdate"));
 
 function saveLocalData()
 {
@@ -16,7 +17,7 @@ function saveLocalData()
 		{
 			console.log('intDate found');
 			console.log(parseFloat(intDate));
-			if (parseFloat(intDate)>=LastUpdate.lastUpdate && serverData!=null && venueData!=null)
+			if (parseFloat(intDate)>=LastUpdate.lastUpdate && serverData!=null && venueData!=null && stallsData!=null)
 			{
 				console.log('data up to date');
 				UpToDate=true;
@@ -51,12 +52,25 @@ function saveLocalData()
 			}).catch(function() {
 				console.log("Booo3");
 			});
+			
+			fetch('http://vryfees.botmasoftware.com/stalls.ashx', {
+				mode: 'cors'
+			}).then(function(response) {
+				return response.json();
+			}).then(function(data) {
+				//console.log(data);
+				localStorage.setItem("stallsUpdate",JSON.stringify(data))
+				stallsData = JSON.parse(localStorage.getItem("stallsUpdate"));
+			}).catch(function() {
+				console.log("Booo4");
+			});
 			setTimeout(saveLocalData, 1000);
 		}
 		else
 		{
 			serverData = JSON.parse(localStorage.getItem("data"));
 			venueData = JSON.parse(localStorage.getItem("dataVenue"));
+			stallsData = JSON.parse(localStorage.getItem("dataStalls"));
 			window.location.replace('home.html');
 		}		
 	}).catch(function() {
@@ -214,19 +228,21 @@ function showSchedule(y) {
 }
 
 function populateStallInfo(stallNum){
-	document.getElementById("showImg").innerHTML = "<img class='insideIMG' src='img/stalls/" + serverData[stallNum].Authors + ".jpg'></img>";
-	document.getElementById("title").innerHTML = serverData[stallNum].Name;
-	document.getElementById("showDesc").innerHTML = "<p><span class='bold'>Stalll Location: </span>" + serverData[stallNum].AfrSynopses + "</p>" + "<p><span class='bold'>Products: </span>" + serverData[stallNum].Synopses;
+	document.getElementById("showImg").innerHTML = "<img class='insideIMG' src='img/stalls/" + stallsData[stallNum].ImageName + ".jpg'></img>";
+	document.getElementById("title").innerHTML = stallsData[stallNum].Name;
+	document.getElementById("showDesc").innerHTML = "<p><span class='bold'>Stall Location: </span>" + stallsData[stallNum].StallNumber + "</p>" 
+													+ "<p><span class='bold'>Owner: </span>" + stallsData[stallNum].OwnerName + "</p>"
+													+ "<p><span class='bold'>Contact num: </span><a href='tel:" + stallsData[stallNum].Contacts[0].Number + "'>" +stallsData[stallNum].Contacts[0].Number +"</a></p>"
+													+ "<p><span class='bold'>e-mail: </span><a href='mailto:" + stallsData[stallNum].Contacts[0].Email + "'>"+ stallsData[stallNum].Contacts[0].Email +"</a></p>"
+													+(stallsData[stallNum].Website!=""?"<p><span class='bold'>Website: </span><a href='" + stallsData[stallNum].Website + "'>" + stallsData[stallNum].Website + "</a></p>":'')
+													+ (stallsData[stallNum].Facebook!=""?"<p><span class='bold'>Facebook: </span>" + stallsData[stallNum].Facebook + "</p>":'')
+													+ "<p><span class='bold'>Products: </span>" + stallsData[stallNum].Product;
 }
 
-function getStalls(festType)
-{
-	//document.getElementById("article").setAttribute("class", festType);
-	for (i=0;i<serverData.length;i++){
-			if(serverData[i].Division == festType){
-					document.getElementById(serverData[i].Categories).innerHTML += "</br>" + "<a href='stall.html?stallNum="+i+"'>" + serverData[i].Name +"</a>" + "</br>";
-			}
-                }
+function getStalls(){
+	for (i=0;i<stallsData.length;i++){
+			document.getElementById(stallsData[i].Genre).innerHTML += "</br>" + "<a href='stall.html?stallNum="+i+"'>" + stallsData[i].Name +"</a>" + "</br>";
+		}
 }
 
 function goBack() {
@@ -260,8 +276,8 @@ function Draw(){
   cnvs.style.left = img.offsetLeft + "px";
   cnvs.style.top = img.offsetTop+ + "px";
   
-  var leftP = serverData[stallNum].Actors[0].Name;
-  var topP = serverData[stallNum].Actors[0].Character;
+  var leftP = stallsData[stallNum].X;
+  var topP = stallsData[stallNum].Y;
   
   var ctx = cnvs.getContext("2d");
   ctx.beginPath();
