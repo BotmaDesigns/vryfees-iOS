@@ -183,9 +183,10 @@ article{
 	height:auto;
 }
 #sponsor{
+	padding-top:1em;
 	width:100vw;
 	height:100vh;
-	background:url(../img/sponsors.jpg) top center no-repeat;
+	background:url(../img/sponsors.jpg) bottom center no-repeat;
 	background-size:contain;
 	background-attachment: fixed;
 }
@@ -403,7 +404,7 @@ article{
 .schedule a{color:white;}
 
 .showImg{
-	height:17em;
+	height:19em;
 	width:100%;
 	margin-bottom:1em;
 	overflow:hidden;
