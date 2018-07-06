@@ -183,12 +183,9 @@ article{
 	height:auto;
 }
 #sponsor{
-	padding-top:1em;
+	padding-top:0.5em;
 	width:100vw;
-	height:100vh;
-	background:url(../img/sponsors.jpg) bottom center no-repeat;
-	background-size:contain;
-	background-attachment: fixed;
+	height:auto;
 }
 
 #shows{
