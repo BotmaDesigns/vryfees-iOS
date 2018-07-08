@@ -275,6 +275,7 @@ function goBack() {
 function startSwiper(){
 	var x = 1;
 	var today = new Date();
+	//console.log(today.toDateString());
 	for(i=0;i<adsData.length;i++){
 		
 			/*var homeAddImg = document.getElementById("homeAdd"+x).innerHTML = "<a href='show.html?showNum="+showNum+"'><div id='addImg'+x></div><div id='addTitle'+x></div><div id='addSynop'+x></div></a>";
@@ -284,8 +285,10 @@ function startSwiper(){
 			
 			var showAdd = homeAddImg + homeAddImgInside + homeAddTitle + homeAddSyn;*/
 			
-					
-		if(adsData.Date = today){
+			var addDate = new Date(0);
+			addDate.setUTCMilliseconds((adsData[i].Date));
+				//console.log(addDate);	
+		if(addDate.toDateString()== today.toDateString()){
 			if(adsData[i].Show!=null){
 				var tmpshowNum = 0;
 				for (j=0;j<serverData.length ;j++){
