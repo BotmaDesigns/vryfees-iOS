@@ -270,6 +270,11 @@ article{
 }
 .backBtn{font-size:3em; position:fixed; top:0.1em; left:0.5em;}
 
+.addIMG{
+	height:19em;
+	width:100vw;
+}
+
 .menu a:not(:first-child) {
 	display: none;
 	font-size:0.9em;

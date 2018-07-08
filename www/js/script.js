@@ -1,6 +1,7 @@
 var serverData = JSON.parse(localStorage.getItem("data"));
 var venueData = JSON.parse(localStorage.getItem("venueUpdate"));
 var stallsData = JSON.parse(localStorage.getItem("stallsUpdate"));
+var adsData = JSON.parse(localStorage.getItem("adsUpdate"));
 
 function saveLocalData()
 {
@@ -64,13 +65,27 @@ function saveLocalData()
 			}).catch(function() {
 				console.log("Booo4");
 			});
-			setTimeout(saveLocalData, 1000);
+			
+			fetch('http://vryfees.botmasoftware.com/tafel.ashx', {
+				mode: 'cors'
+			}).then(function(response) {
+				return response.json();
+			}).then(function(data) {
+				//console.log(data);
+				localStorage.setItem("adsUpdate",JSON.stringify(data))
+				adsData = JSON.parse(localStorage.getItem("adsUpdate"));
+			}).catch(function() {
+				console.log("no ads");
+			});
+			
+			setTimeout(saveLocalData, 3000);
 		}
 		else
 		{
 			serverData = JSON.parse(localStorage.getItem("data"));
 			venueData = JSON.parse(localStorage.getItem("dataVenue"));
 			stallsData = JSON.parse(localStorage.getItem("dataStalls"));
+			adsData = JSON.parse(localStorage.getItem("dataAds"));
 			window.location.replace('home.html');
 		}		
 	}).catch(function() {
@@ -206,8 +221,16 @@ function carousel() {
     setTimeout(carousel, 5000); // Change image every 5 seconds
 }
 
-
 function myFunction() {
+    var x = document.getElementById("menu");
+    if (x.className === "menu") {
+        x.className += " showMenu";
+    } else {
+        x.className = "menu";
+    }
+}
+
+function myFunctionApple() {
     var x = document.getElementById("menu");
     if (x.className === "menu") {
         x.className += " showMenu";
@@ -250,11 +273,77 @@ function goBack() {
 }
 
 function startSwiper(){
+	var x = 1;
+	var today = new Date();
+	for(i=0;i<adsData.length;i++){
+		
+			/*var homeAddImg = document.getElementById("homeAdd"+x).innerHTML = "<a href='show.html?showNum="+showNum+"'><div id='addImg'+x></div><div id='addTitle'+x></div><div id='addSynop'+x></div></a>";
+			var homeAddImgInside = document.getElementById("addImg"+x).innerHTML = "<img class='insideIMG' src='img/shows/" + serverData[showNum].Authors + ".jpg'></img>";
+			var homeAddTitle = document.getElementById("addTitle"+x).innerHTML = serverData[showNum].Name;
+			var homeAddSyn = document.getElementById("addSynop"+x).innerHTML = serverData[showNum].Synopses;
+			
+			var showAdd = homeAddImg + homeAddImgInside + homeAddTitle + homeAddSyn;*/
+			
+					
+		if(adsData.Date = today){
+			if(adsData[i].Show!=null){
+				var tmpshowNum = 0;
+				for (j=0;j<serverData.length ;j++){
+					
+					if (adsData[i].Show.Oid==serverData[j].Oid && tmpshowNum==0)
+					{
+						
+						tmpshowNum = j;
+					}
+				}
+				
+				var showImg = "<img class='addIMG' title='stallImg"+x+"' src='img/shows/" + serverData[tmpshowNum].Authors + ".jpg' onerror=\"this.src='img/error.jpg';\"alt=''></img>";
+				var showTitle =  serverData[tmpshowNum].Name;
+				var showSyn = serverData[tmpshowNum].AfrSynopses;
+				
+				var baseHTML = "<a href='show.html?showNum="+tmpshowNum+"'><div class=\"showTitle\">"+showImg+"<div id=\"title"+x+"\">"+showTitle+"</div></div><div class=\"showDesc\" id=\"showDesc"+x+"\">"+showSyn+"</div></a>";
+				var showAdd = showImg + showTitle + showSyn;
+				
+				document.getElementById("swiper-wrapper").innerHTML += "<div id='homeAdd" + x + "' class='swiper-slide'>"+baseHTML+"</div>";
+					
+				
+			}
+			if(adsData[i].Stall!=null){
+				var tmpstallNum = 0;
+				for (j=0;j<stallsData.length ;j++){
+					
+					if (adsData[i].Stall.Oid==stallsData[j].Oid && tmpstallNum==0)
+					{
+						
+						tmpstallNum = j;
+					}
+				}
+				
+				var stallImg = "<img class='addIMG' title='stallImg"+x+"' src='img/stalls/" + stallsData[tmpstallNum].ImageName + ".jpg' onerror=\"this.src='img/error.jpg';\"alt=''></img>";
+				var stallTitle =  stallsData[tmpstallNum].Name;
+				var stallSyn = "<p><span class='bold'>Stall Location: </span>" + stallsData[tmpstallNum].StallNumber + "</p>" 
+																+ "<p><span class='bold'>Owner: </span>" + stallsData[tmpstallNum].OwnerName + "</p>"
+																+ "<p><span class='bold'>Contact num: </span><a href='tel:" + stallsData[tmpstallNum].Contacts[0].Number + "'>" +stallsData[tmpstallNum].Contacts[0].Number +"</a></p>"
+																+ (adsData[i].AdText!=null?"<p>" + adsData[i].AdText +"</p>":'')
+																+ "<p><span class='bold'>Products: </span>" + stallsData[tmpstallNum].Product;
+				
+				var baseHTML = "<a href='stall.html?stallNum="+tmpstallNum+"'><div class=\"showTitle\">"+stallImg+"<div id=\"title"+x+"\">"+stallTitle+"</div></div><div class=\"showDesc\" id=\"showDesc"+x+"\">"+stallSyn+"</div></a>";
+				var stallAdd = stallImg + stallTitle + stallSyn;
+				
+				document.getElementById("swiper-wrapper").innerHTML += "<div id='homeAdd" + x + "' class='swiper-slide'>"+baseHTML+"</div>";
+					
+				
+			}
+			x++;
+			console.log(x);
+		}
+	}
+	
 	var swiper = new Swiper('.swiper-container', {
       spaceBetween: 10,
       centeredSlides: true,
       autoplay: {
-        delay: 4000,
+        delay: 2000,
         disableOnInteraction: false,
       },
       pagination: {
@@ -281,7 +370,7 @@ function Draw(){
   
   var ctx = cnvs.getContext("2d");
   ctx.beginPath();
-  ctx.arc(leftP, topP, 5, 0, 2 * Math.PI, false);		//actor name  <--->,  Char name  ^
+  ctx.arc(leftP, topP, 5, 0, 2 * Math.PI, false);
   ctx.lineWidth = 3;
   ctx.strokeStyle = '#ff0000';
   ctx.stroke();
